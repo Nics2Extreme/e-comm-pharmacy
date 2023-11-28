@@ -6,17 +6,16 @@
                 <table class="table table-striped bg-light text-center">
                     <thead>
                         <tr class="text-muted">
-                            <th>#</th>
-                            <th>Customer Name</th>
-                            <th>Contact</th>
-                            <th>Drop Off</th>
-                            <th>Mode of Payment</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        getAdminOrders();
-                        ?>
+                        <?php getOrderDetails() ?>
+                        <tr>
+                            <td colspan="3">Total: P<?php echo isset($_SESSION['itemTotal']) ? $_SESSION['itemTotal'] : $_SESSION['itemTotal'] = "0"; ?></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

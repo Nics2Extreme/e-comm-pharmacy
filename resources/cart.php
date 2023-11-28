@@ -93,10 +93,10 @@ function cart()
                                 </a>
                             </td>
                         </tr>
-                        <input type="hidden" name="item_name_{$item_name}" value="{$row['productTitle']}>
+                        <input type="hidden" name="item_name[]" value="{$row['productTitle']}">
                         <input type="hidden" name="item_number_{$item_number}" value="{$row['productID']}">
-                        <input type="hidden" name="amount_{$amount}" value="{$row['productPriceDiscount']}">
-                        <input type="hidden" name="quantity_{$quantity}" value="{$value}">
+                        <input type="hidden" name="amount[]" value="{$row['productPriceDiscount']}">
+                        <input type="hidden" name="quantity[]" value="{$value}">
                         DELIMETER;
                     echo $productDisplay;
 
@@ -110,21 +110,6 @@ function cart()
                 $_SESSION['itemQuantity'] = $itemCount;
             }
         }
-    }
-}
-
-
-// this function will only show the button when user has products in the cart
-function showPaypalButton()
-{
-
-    if (isset($_SESSION['itemQuantity']) && $_SESSION['itemQuantity'] >= 1) {
-        $paypalButton = <<<DELIMETER
-            <input type="image" name="upload"
-                src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
-                alt="PayPal - The safer, easier way to pay online">
-            DELIMETER;
-        return $paypalButton;
     }
 }
 

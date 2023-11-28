@@ -34,7 +34,7 @@ include(Front_End . DS . "topnavguest.php");
 
     <!-- Our Client -->
     <?php
-    include(Front_End . DS . "client.php");
+    // include(Front_End . DS . "client.php");
     ?>
     <!-- /Our Client -->
 

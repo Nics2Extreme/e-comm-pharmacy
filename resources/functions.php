@@ -601,7 +601,6 @@ function getAdminProducts()
                     <td>{$row['productPriceDiscount']}</td>
                     <td>{$row['productQuantity']}</td>
                     <td>{$row['productAvailability']}</td>
-                    <td>{$row['productDelivery']}</td>
                     <td><button class="btn btn-danger" onclick="deleteProduct('{$row['productID']}')"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                 </tr>
             DELIMETER;
@@ -640,19 +639,40 @@ function getAdminOrders()
     while ($row = fetch_array($query)) {
         $order = <<<DELIMETER
                 <tr>
-                    <th>{$row['orderID']}</th>
-                    <td>{$row['productID']}</td>
-                    <td>{$row['orderAmount']}</td>
-                    <td>{$row['orderDate']}</td>
-                    <td>{$row['orderStatus']}</td>
-                    <td><a class="btn btn-danger" href="index.php?deleteOrderID={$row['orderID']}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                    <td>{$row['order_id']}</td>
+                    <td>{$row['customerName']}</td>
+                    <td>{$row['contact']}</td>
+                    <td>{$row['dropoff']}</td>
+                    <td><a class="btn btn-info" href="index.php?get_order&getOrderDetails={$row['order_id']}">Order Details</a></td>
+                    <td><a class="btn btn-success" href="index.php?completeOrderID={$row['order_id']}"><i class="fa fa-check" aria-hidden="true"></i></a></td>
+                    <td><a class="btn btn-danger" href="index.php?deleteOrderID={$row['order_id']}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                 </tr>
             DELIMETER;
         echo $order;
     }
 }
 
+function getOrderDetails()
+{
+    if (isset($_GET['getOrderDetails'])) {
+        $total = 0;
+        $query = query("SELECT * FROM order_details WHERE order_id = " . escape_string($_GET['getOrderDetails']) . " ");
+        confirm($query);
 
+        while ($row = fetch_array($query)) {
+            $total += $row["quantity"] * $row["price"];
+            $order = <<<DELIMETER
+                    <tr>
+                        <td>{$row['product_name']}</td>
+                        <td>{$row['quantity']}</td>
+                        <td>{$row['price']}</td>
+                    </tr>
+                DELIMETER;
+            echo $order;
+        }
+        $_SESSION['itemTotal'] = $total;
+    }
+}
 
 // this function will show the admin the types of user in the database and their details in the database
 function getAdminUsers()
@@ -695,14 +715,13 @@ function addProducts()
         $productQuantity = escape_string($_POST['productQuantity']);
         $productSection = escape_string($_POST['productSection']);
         $productAvailability = escape_string($_POST['productAvailability']);
-        $productDelivery = escape_string($_POST['productDelivery']);
 
 
         $query = query("INSERT INTO products(productTitle, productCategoryID, brandID, productPrice, productPriceDiscount, productImage, productDescription, 
-                            productShortDescription, productQuantity, productSection, productAvailability, productDelivery) 
+                            productShortDescription, productQuantity, productSection, productAvailability) 
                             VALUES 
                             ('{$productTitle}', '{$productCategoryID}', '{$brandID}', '{$productPrice}', '{$productPriceDiscount}', '{$productImagePath}', '{$description}', 
-                            '{$short_desc}', '{$productQuantity}', '{$productSection}', '{$productAvailability}', '{$productDelivery}')");
+                            '{$short_desc}', '{$productQuantity}', '{$productSection}', '{$productAvailability}')");
         if ($query) {
             copy($productImageTemporary, "../" . $productImagePath);
             $msg = "Product has successfully being added";
@@ -763,7 +782,6 @@ function updateProducts()
         $productQuantity = escape_string($_POST['productQuantity']);
         $productSection = escape_string($_POST['productSection']);
         $productAvailability = escape_string($_POST['productAvailability']);
-        $productDelivery = escape_string($_POST['productDelivery']);
 
         move_uploaded_file($_FILES['image']['name'], "images/$productImage");
 
@@ -781,10 +799,51 @@ function updateProducts()
         $query .= "productQuantity = '{$productQuantity}',";
         $query .= "productSection = '{$productSection}',";
         $query .= "productAvailability = '{$productAvailability}',";
-        $query .= "productDelivery =  '{$productDelivery}'";
         $query .= "WHERE productID" . escape_string($_GET['id']);
 
         setMessage($msg);
         redirect("index.php?products");
+    }
+}
+
+function checkout()
+{
+    if (isset($_POST['checkout'])) {
+        global $connection;
+        $name = $_POST['customerName'];
+        $contact = $_POST['contact'];
+        $dropoff = $_POST['dropoff'];
+        $item_name = $_POST['item_name'];
+        $quantity = $_POST['quantity'];
+        $price = $_POST['amount'];
+        $ref = $_POST['ref'];
+
+        $storedItem = array();
+
+        foreach ($item_name as $index => $item_name) {
+            $storedItem[$index + 1] = $item_name;
+        }
+
+        $storedQuantity = array();
+
+        foreach ($quantity as $index => $quantity) {
+            $storedQuantity[$index + 1] = $quantity;
+        }
+
+        $storedPrice = array();
+
+        foreach ($price as $index => $price) {
+            $storedPrice[$index + 1] = $price;
+        }
+
+        $query = query("INSERT INTO orders (customerName, contact, dropoff, ref, status) VALUES ('$name', '$contact', '$dropoff', '$ref', 'In Process')");
+        $order_id = $connection->insert_id;
+
+        foreach ($storedItem as $index => $item_name) {
+            $query = query("INSERT INTO order_details (order_id, product_name, quantity, price) 
+                            VALUES ($order_id, '$item_name', $storedQuantity[$index], $storedPrice[$index])");
+        }
+
+        redirect("success.php");
     }
 }

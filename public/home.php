@@ -46,7 +46,7 @@ include(Front_End . DS . "header.php");
 
     <!-- Brand -->
     <?php
-    include(Front_End . DS . "brands.php");
+    // include(Front_End . DS . "brands.php");
     ?>
     <!-- /Brand -->
 

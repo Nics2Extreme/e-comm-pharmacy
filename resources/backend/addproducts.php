@@ -73,10 +73,6 @@
                         <input type="text" class="form-control" name="productAvailability">
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputState">Delivery</label>
-                        <input type="text" class="form-control" name="productDelivery">
-                    </div>
                     <button type="submit" class="btn btn-primary" name="add">Add</button>
                 </form>
             </div>

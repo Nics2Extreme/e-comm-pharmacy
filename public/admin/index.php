@@ -14,6 +14,14 @@ include(Back_End . DS . "header.php");
         include(Back_End . DS . "/orders.php");
     }
 
+    if (isset($_GET['get_order'])) {
+        include(Back_End . DS . "/order_details.php");
+    }
+
+    if (isset($_GET['completeOrderID'])) {
+        include(Back_End . DS . "/completeOrderID.php");
+    }
+
     if (isset($_GET['categories'])) {
         include(Back_End . DS . "/categories.php");
     }
