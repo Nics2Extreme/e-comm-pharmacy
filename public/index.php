@@ -5,6 +5,7 @@ require_once("../resources/config.php");
 include(Front_End . DS . "headerguest.php");
 ?>
 <?php
+include('notifications.php');
 include(Front_End . DS . "topnavguest.php");
 ?>
 

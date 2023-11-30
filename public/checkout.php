@@ -58,20 +58,20 @@ include(Front_End . DS . "header.php");
                             <select class="form-select" name="dropoff">
                                 <option selected>Select Drop-off</option>
                                 <option value="1">Binondo</option>
-                                <option value="2">Ermita</option>
-                                <option value="3">Intramuros</option>
-                                <option value="4">Malate</option>
-                                <option value="5">Paco</option>
-                                <option value="6">Pandacan</option>
-                                <option value="7">Quiapo</option>
-                                <option value="8">Sampaloc</option>
-                                <option value="9">San Andres</option>
-                                <option value="10">San Miguel</option>
-                                <option value="11">San Nicaolas</option>
-                                <option value="12">Santa Ana</option>
-                                <option value="13">Santa Cruz</option>
-                                <option value="14">Santa Mesa</option>
-                                <option value="15">Tondo</option>
+                                <option value="1">Ermita</option>
+                                <option value="1">Intramuros</option>
+                                <option value="1">Malate</option>
+                                <option value="1">Paco</option>
+                                <option value="2">Pandacan</option>
+                                <option value="2">Quiapo</option>
+                                <option value="2">Sampaloc</option>
+                                <option value="2">San Andres</option>
+                                <option value="2">San Miguel</option>
+                                <option value="3">San Nicaolas</option>
+                                <option value="3">Santa Ana</option>
+                                <option value="3">Santa Cruz</option>
+                                <option value="3">Santa Mesa</option>
+                                <option value="3">Tondo</option>
                             </select>
                         </div>
 

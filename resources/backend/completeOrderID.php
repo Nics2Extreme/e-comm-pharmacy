@@ -12,7 +12,7 @@ if (isset($_GET['completeOrderID'])) {
     $subject = "Order Completed";
     $comment = "Your order has been successfully completed!";
 
-    $insert_query = query("INSERT INTO inf(notifications_name,message,active)VALUES('" . $subject . "','" . $comment . "','1')");
+    $insert_query = query("INSERT INTO inf(notifications_name,message,username,active)VALUES('" . $subject . "','" . $comment . $SESSION['username'] . "','1')");
 
 
     redirect("../../public/admin/index.php?orders");

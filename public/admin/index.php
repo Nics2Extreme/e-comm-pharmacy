@@ -7,6 +7,7 @@ include(Back_End . DS . "header.php");
 <div class="container-fluid" style="margin-top: 150px; margin-left: 30px">
     <?php
     if (isset($_GET['dashboard'])) {
+        include('bargraph.php');
         include(Back_End . DS . "/dashboard.php");
     }
 

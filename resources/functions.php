@@ -813,6 +813,7 @@ function checkout()
         $name = $_POST['customerName'];
         $contact = $_POST['contact'];
         $dropoff = $_POST['dropoff'];
+        $_SESSION['dropoff'] = $dropoff;
         $item_name = $_POST['item_name'];
         $quantity = $_POST['quantity'];
         $price = $_POST['amount'];

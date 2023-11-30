@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 02:02 PM
+-- Generation Time: Nov 30, 2023 at 06:00 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -99,6 +99,7 @@ CREATE TABLE `inf` (
   `n_id` int(11) NOT NULL,
   `notifications_name` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
   `active` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -106,8 +107,8 @@ CREATE TABLE `inf` (
 -- Dumping data for table `inf`
 --
 
-INSERT INTO `inf` (`n_id`, `notifications_name`, `message`, `active`) VALUES
-(3, 'Order Completed', 'Your order has been successfully completed!', 1);
+INSERT INTO `inf` (`n_id`, `notifications_name`, `message`, `username`, `active`) VALUES
+(3, 'Order Completed', 'Your order has been successfully completed!', 'sam_user', 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `customerName`, `contact`, `dropoff`, `ref`, `status`, `order_date`) VALUES
 (1, 'Jhonsen Nicandro', '09983237481', '4', '', 'Confirmed', '2023-11-26 05:54:41'),
-(2, 'Haruno Gio', '992323748', '14', '', 'Confirmed', '2023-11-28 12:30:08');
+(2, 'Haruno Gio', '992323748', '14', '', 'Confirmed', '2023-11-28 12:30:08'),
+(3, 'Jhonsen Nicandro', '09983237481', '1', '', 'In Process', '2023-11-30 16:50:07');
 
 -- --------------------------------------------------------
 
@@ -153,9 +155,10 @@ CREATE TABLE `order_details` (
 
 INSERT INTO `order_details` (`detail_id`, `order_id`, `product_name`, `quantity`, `price`) VALUES
 (1, 1, 'Paracetamol Biogesic 500mg', 2, 9.25),
-(2, 1, 'Advil Ibuprofen 200mg', 1, 8.75),
+(2, 1, 'Amoxicillin 500mg', 1, 10.00),
 (3, 2, 'Paracetamol Biogesic 500mg', 1, 9.25),
-(4, 2, 'Tuseran Forte 15mg', 1, 12.25);
+(4, 2, 'Tuseran Forte 15mg', 1, 12.25),
+(5, 3, 'Tuseran Forte 15mg', 1, 12.25);
 
 -- --------------------------------------------------------
 
@@ -333,13 +336,13 @@ ALTER TABLE `inf`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
