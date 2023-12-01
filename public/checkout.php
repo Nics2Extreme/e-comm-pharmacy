@@ -47,7 +47,11 @@ include(Front_End . DS . "header.php");
                         </table>
                         <div class="form-group">
                             <label for="customerName">Customer Name</label>
-                            <input type="text" class="form-control" name="customerName">
+                            <select class="form-select" name="customerName">
+                                <?php if($_SESSION['username']){?>
+                                    <option value="<?php echo $_SESSION['username']?>"><?php echo $_SESSION['username']?></option>
+                                <?php }?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="contact">Contact Number</label>
