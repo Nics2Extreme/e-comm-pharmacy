@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2023 at 06:00 PM
+-- Generation Time: Dec 01, 2023 at 04:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -103,13 +103,6 @@ CREATE TABLE `inf` (
   `active` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `inf`
---
-
-INSERT INTO `inf` (`n_id`, `notifications_name`, `message`, `username`, `active`) VALUES
-(3, 'Order Completed', 'Your order has been successfully completed!', 'sam_user', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -122,6 +115,7 @@ CREATE TABLE `orders` (
   `contact` varchar(255) DEFAULT NULL,
   `dropoff` varchar(255) DEFAULT NULL,
   `ref` varchar(255) DEFAULT NULL,
+  `prescription` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -130,10 +124,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `customerName`, `contact`, `dropoff`, `ref`, `status`, `order_date`) VALUES
-(1, 'Jhonsen Nicandro', '09983237481', '4', '', 'Confirmed', '2023-11-26 05:54:41'),
-(2, 'Haruno Gio', '992323748', '14', '', 'Confirmed', '2023-11-28 12:30:08'),
-(3, 'Jhonsen Nicandro', '09983237481', '1', '', 'In Process', '2023-11-30 16:50:07');
+INSERT INTO `orders` (`order_id`, `customerName`, `contact`, `dropoff`, `ref`, `prescription`, `status`, `order_date`) VALUES
+(9, 'sam_user', '992323748', '2', '', 'images/chelly.png', 'In Process', '2023-12-01 14:28:47');
 
 -- --------------------------------------------------------
 
@@ -154,11 +146,7 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`detail_id`, `order_id`, `product_name`, `quantity`, `price`) VALUES
-(1, 1, 'Paracetamol Biogesic 500mg', 2, 9.25),
-(2, 1, 'Amoxicillin 500mg', 1, 10.00),
-(3, 2, 'Paracetamol Biogesic 500mg', 1, 9.25),
-(4, 2, 'Tuseran Forte 15mg', 1, 12.25),
-(5, 3, 'Tuseran Forte 15mg', 1, 12.25);
+(11, 9, 'Paracetamol Biogesic 500mg', 1, 9.25);
 
 -- --------------------------------------------------------
 
@@ -336,13 +324,13 @@ ALTER TABLE `inf`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
