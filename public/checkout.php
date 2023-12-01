@@ -48,9 +48,9 @@ include(Front_End . DS . "header.php");
                         <div class="form-group">
                             <label for="customerName">Customer Name</label>
                             <select class="form-select" name="customerName">
-                                <?php if($_SESSION['username']){?>
-                                    <option value="<?php echo $_SESSION['username']?>"><?php echo $_SESSION['username']?></option>
-                                <?php }?>
+                                <?php if ($_SESSION['username']) { ?>
+                                    <option value="<?php echo $_SESSION['username'] ?>"><?php echo $_SESSION['username'] ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -77,6 +77,11 @@ include(Front_End . DS . "header.php");
                                 <option value="3">Santa Mesa</option>
                                 <option value="3">Tondo</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="uploadfile">Please upload a prescription if applicable: </label>
+                            <input type="hidden" id="image" name="image" value="default.png">
+                            <input type="file" name="uploadfile" value="" /><br><br><br>
                         </div>
 
                         <!-- Order Summary -->

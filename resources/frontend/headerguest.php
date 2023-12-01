@@ -31,7 +31,7 @@
 </head>
 
 <body>
-     <header>
+     <header style="background-image: url('images/pharma_bg.jpg'); background-repeat: no-repeat; background-size: cover;">
           <div class="container">
                <div class="row">
                     <div class="col-md-4 col-sm-12 col-12">

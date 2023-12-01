@@ -99,12 +99,12 @@ foreach ($aggregatedData as $label => $y) {
 </head>
 
 <body>
-    <div class="row">
+    <div class="row" style="padding-left: 100px; padding-right: 100px;">
         <div class="col-6">
-            <div id="salesChart" style="height: 370px; width: 60%; margin: auto;"></div>
+            <div id="salesChart" style="height: 370px; width: 60%; margin: auto; padding: 0;"></div>
         </div>
         <div class="col-6">
-            <div id="chartContainer" style="height: 370px; width: 60%; margin: auto;"></div>
+            <div id="chartContainer" style="height: 370px; width: 60%; margin: auto; padding: 0;"></div>
         </div>
     </div>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>

@@ -639,6 +639,7 @@ function getAdminOrders()
     while ($row = fetch_array($query)) {
         $order = <<<DELIMETER
                 <tr>
+                    <td><img src='../{$row['prescription']}' class='mx-auto' width=50% /></td>
                     <td>{$row['order_id']}</td>
                     <td>{$row['customerName']}</td>
                     <td>{$row['contact']}</td>
@@ -819,32 +820,37 @@ function checkout()
         $price = $_POST['amount'];
         $ref = $_POST['ref'];
 
-        $storedItem = array();
+        $filename = $_FILES["uploadfile"]["name"];
+        $tempname = $_FILES["uploadfile"]["tmp_name"];
+        $folder = "images/" . $filename;
+        if (move_uploaded_file($tempname, $folder)) {
+            $storedItem = array();
 
-        foreach ($item_name as $index => $item_name) {
-            $storedItem[$index + 1] = $item_name;
-        }
+            foreach ($item_name as $index => $item_name) {
+                $storedItem[$index + 1] = $item_name;
+            }
 
-        $storedQuantity = array();
+            $storedQuantity = array();
 
-        foreach ($quantity as $index => $quantity) {
-            $storedQuantity[$index + 1] = $quantity;
-        }
+            foreach ($quantity as $index => $quantity) {
+                $storedQuantity[$index + 1] = $quantity;
+            }
 
-        $storedPrice = array();
+            $storedPrice = array();
 
-        foreach ($price as $index => $price) {
-            $storedPrice[$index + 1] = $price;
-        }
+            foreach ($price as $index => $price) {
+                $storedPrice[$index + 1] = $price;
+            }
 
-        $query = query("INSERT INTO orders (customerName, contact, dropoff, ref, status) VALUES ('$name', '$contact', '$dropoff', '$ref', 'In Process')");
-        $order_id = $connection->insert_id;
+            $query = query("INSERT INTO orders (customerName, contact, dropoff, ref, prescription, status) VALUES ('$name', '$contact', '$dropoff', '$ref', '$folder', 'In Process')");
+            $order_id = $connection->insert_id;
 
-        foreach ($storedItem as $index => $item_name) {
-            $query = query("INSERT INTO order_details (order_id, product_name, quantity, price) 
+            foreach ($storedItem as $index => $item_name) {
+                $query = query("INSERT INTO order_details (order_id, product_name, quantity, price) 
                             VALUES ($order_id, '$item_name', $storedQuantity[$index], $storedPrice[$index])");
-        }
+            }
 
-        redirect("success.php");
+            redirect("success.php");
+        }
     }
 }

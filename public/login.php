@@ -14,7 +14,6 @@ include(Front_End . DS . "headerguest.php");
 	?>
 </h3>
 
-
 <div class="container h-100" style="margin-top: 150px; margin-bottom: 150px;">
 	<div class="d-flex justify-content-center h-100">
 		<div class="user_card">

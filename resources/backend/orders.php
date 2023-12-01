@@ -6,6 +6,7 @@
                 <table class="table table-striped bg-light text-center">
                     <thead>
                         <tr class="text-muted">
+                            <th>Prescription</th>
                             <th>#</th>
                             <th>Customer Name</th>
                             <th>Contact</th>
